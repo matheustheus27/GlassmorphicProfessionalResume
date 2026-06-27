@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: cv_frontend_dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Enables Hot Reload on Linux/WSL systems
+    networks:
+      - cv_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: cv_backend_dev
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    # The command below checks if .env exists (-f) and runs "cp" before running nodemon
+    command: sh -c "if [ ! -f .env ] && [ -f .env.example ]; then cp .env.example .env; fi && nodemon server.js"
+    networks:
+      - cv_network
+
+networks:
+  cv_network:
+    driver: bridge

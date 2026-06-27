@@ -1,0 +1,23 @@
+import { Locale, TranslationDict } from '../types/translationType';
+import { personalDetails } from './PersonalData';
+import { summaryDetails } from './SummaryData';
+import { skillsDetails } from './SkillsData';
+import { experienceDetails } from './ExperienceData';
+import { educationDetails } from './EducationData';
+
+export const Translations: Record<Locale, TranslationDict> = {
+    'pt-BR': {
+        personalDetails: personalDetails('pt-BR'),
+        summaryDetails: summaryDetails['pt-BR'],
+        skillsDetails: skillsDetails['pt-BR'],
+        experienceDetails: experienceDetails['pt-BR'],
+        educationDetails: educationDetails['pt-BR']
+    },
+    'en-US': {
+        personalDetails: personalDetails('en-US'),
+        summaryDetails: summaryDetails['en-US'],
+        skillsDetails: skillsDetails['en-US'],
+        experienceDetails: experienceDetails['en-US'],
+        educationDetails: educationDetails['en-US']
+    }
+};
