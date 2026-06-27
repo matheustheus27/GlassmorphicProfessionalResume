@@ -1,4 +1,4 @@
-# 📄 Dynamic CV Builder & PDF Engine
+# 📄 GlassmorphicProfessionalResume - Dynamic CV Builder & PDF Engine
 
 A modern, full-stack ecosystem designed to manage, render, and export a professional resume dynamically. This project replaces traditional, rigid styling approaches with a decoupled architecture, utilizing a highly customizable frontend and a dedicated backend service exclusively focused on consistent PDF document generation.
 
