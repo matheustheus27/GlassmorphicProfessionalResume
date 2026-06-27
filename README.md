@@ -18,7 +18,7 @@ A modern, full-stack ecosystem designed to manage, render, and export a professi
 
 The project is structured with the frontend application at the core workspace root and the backend isolated in a dedicated subdirectory:
 
-* **Frontend (Root Directory):** An interactive, rich user interface built with **React and TypeScript** to manage CV data layouts, dynamic translations, custom styling typography, and theme tokens.
+* **Frontend (`/frontend`):** An interactive, rich user interface built with **React and TypeScript** to manage CV data layouts, dynamic translations, custom styling typography, and theme tokens.
 * **Backend (`/backend`):** A dedicated microservice acting as the PDF export engine. It processes structural and layout payload data through Puppeteer to deliver an identical PDF document on any device.
 
 ---
