@@ -5,7 +5,7 @@ export const educationDetails: Record<string, EducationDetails> = {
         educationTitle: "FORMAÇÃO ACADÊMICA",
         educations: [
             {
-                organization: "Universid1ade Federal de Tecnologia (UFT)",
+                organization: "Universidade Federal de Tecnologia (UFT)",
                 degree: "Bacharelado em Engenharia de Computação",
                 period: "2020 - Em andamento",
                 description: "Formação conceitual e empírica sólida englobando Teoria da Computação, Compiladores, Engenharia de Software, Sistemas Operacionais Distribuídos e Arquitetura de Redes. Desenvolvimento de projetos de pesquisa focados em Interação Humano-Computador (IHC) e Realidade Aumentada aplicada à otimização de fluxos operacionais."
