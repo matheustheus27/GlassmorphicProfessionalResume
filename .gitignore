@@ -20,8 +20,4 @@ yarn-error.log*
 .env.production.local
 
 # User Data Files
-.EducationData.ts
-.ExperienceData.ts
-.PersonalData.ts
-.SkillsData.ts
-.SummaryData.ts
+frontend/src/app/data/
