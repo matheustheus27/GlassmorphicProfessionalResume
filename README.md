@@ -23,33 +23,44 @@ The project is structured with the frontend application at the core workspace ro
 
 ---
 
-## 📁 CV Data Customization
+## 📁 CV Data Customization & Privacy Shield
 
-All the content, language dictionary nodes, and visual styling rules are defined inside the **`/src/data`** directory on the frontend. To build your own resume, you need to customize the following files:
+To protect your personal information (such as real phone numbers, emails, addresses, and employment history) when publishing your fork or repository publicly, the project utilizes an automated **Template Customization Layer**.
 
-### 👤 Candidate Information
+All candidate structure models are stored in the **`frontend/src/app/data/`** directory. The real `.ts` production files are automatically ignored by `.gitignore` to prevent data leaks, while public `.ts.example` files are provided as structural templates.
 
-The following files must be edited with the actual candidate's real information to populate the resume sections:
+### 👤 Candidate Information Templates
 
-* **`PersonalData.ts`**: Contains core personal details (Full Name, professional title, location map links, and contact channels like Email, Phone, GitHub, and LinkedIn).
-* **`SummaryData.ts`**: Holds the professional summary or profile pitch paragraph for each supported language.
-* **`SkillsData.ts`**: Defines the technical skills categories (e.g., Languages, Frameworks, Databases) and their respective skill items.
-* **`ExperienceData.ts`**: Stores the professional background history grid, roles, periods, and accomplishment bullet points.
-* **`EducationData.ts`**: Contains academic degrees, vocational courses, certifications, and institutional descriptions.
+To build your own resume, customize the fields inside these structural files:
+
+* **`frontend/src/app/data/PersonalData.ts.example`**: Contains core personal details (Full Name, professional title, location map links, and contact channels like Email, Phone, GitHub, and LinkedIn).
+* **`frontend/src/app/data/SummaryData.ts.example`**: Holds the professional summary or profile pitch paragraph for each supported language.
+* **`frontend/src/app/data/SkillsData.ts.example`**: Defines the technical skills categories (e.g., Languages, Frameworks, Databases) and their respective skill items.
+* **`frontend/src/app/data/ExperienceData.ts.example`**: Stores the professional background history grid, roles, periods, and accomplishment bullet points.
+* **`frontend/src/app/data/EducationData.ts.example`**: Contains academic degrees, vocational courses, certifications, and institutional descriptions.
 
 ### 🎨 Visual & Layout Settings
 
-* **`SettingsData.ts`**: Edit this file if you wish to change the color palettes, fonts, font sizes, weights, or container dimensions for both Light and Dark modes.
+* **`src/app/data/SettingsData.ts.example`**: Edit this template to change the color palettes, fonts, font sizes, weights, or container dimensions for both Light and Dark modes.
 
-### 🌐 Adding New Languages
+### 🌐 Pre-bundled Global Settings
 
-* **`LanguagesData.ts`**: By default, the system comes bootstrapped with **Brazilian Portuguese (`pt-BR`)** and **US English (`en-US`)**. If you want to support a third language, register its locale metadata code, flag emoji, and label here, then add its corresponding dictionary translation node into the data files mentioned above.
+* **`src/app/data/LanguagesData.ts`**: This file is tracked publicly by default as it does not contain private user information. It bootstraps the system with **Brazilian Portuguese (`pt-BR`)** and **US English (`en-US`)**. You can easily append new locales here.
 
 ---
 
-## 🐳 Dockerization & Hot Reload
+## 🐳 Dockerization & Automated Bootstrap
 
-The entire ecosystem is containerized using Docker and calibrated with local volumes. Any changes made to your data components (such as `ExperienceData.ts`, `PersonalData.ts`) or backend rendering scripts will trigger an instant reload in the running application environment.
+The entire ecosystem is containerized using Docker and calibrated with local volumes. To provide a zero-setup onboarding experience, the orchestration layer handles all file initialization automatically.
+
+### 🔄 Intelligent Initialization Automation
+
+When you execute `docker-compose up`, the multi-stage environment performs the following automated synchronization routines before starting up the dev servers:
+
+1. **Frontend Bootstrapping:** The container scans the `src/app/data/` folder. For every missing production file (e.g., `PersonalData.ts`), it automatically creates a functional clone from its corresponding template (`PersonalData.ts.example`).
+2. **Backend Bootstrapping:** The container verifies the existence of the runtime configuration environment. If no `.env` file is present, it instantly bootstraps one from the `.env.example` template.
+
+Any changes subsequently made to your active data components or backend rendering scripts will trigger an instant Hot Reload in the running container without service interruption.
 
 ### Prerequisites
 
@@ -64,8 +75,6 @@ The backend service utilizes a `.env` file to calibrate layout dimensions.
 
 * **`PARAMETER_PAGE_WIDTH`**: Defines the virtual page height calculation factor used by the layout engine to determine page splits. **The default recommended value is `1000`**.
 
-> 💡 **Automation:** When starting the environment via Docker Compose, the orchestrator automatically checks if the `/backend/.env` file exists. If it doesn't, it will automatically clone and bootstrap one from `/backend/.env.example`.
-
 ---
 
 ## 🚀 How to Run the Project
@@ -74,7 +83,7 @@ You can spin up the entire ecosystem simultaneously using the Docker Compose con
 
 ### 1. Build and Start the Containers
 
-Run the following command to build the images and launch the services in development mode:
+Run the following command to build the images, initialize the missing data files from templates, and launch the services in development mode:
 
 ```bash
 docker-compose up --build

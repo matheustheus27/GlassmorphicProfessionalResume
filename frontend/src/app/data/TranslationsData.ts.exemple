@@ -1,6 +1,6 @@
 import { Locale, TranslationDict } from '../types/translationType';
 import { personalDetails } from './PersonalData';
-import { summaryDetails } from './SummaryData';
+import { summaryDetails } from './SummaryData.ts.exemple';
 import { skillsDetails } from './SkillsData';
 import { experienceDetails } from './ExperienceData';
 import { educationDetails } from './EducationData';
