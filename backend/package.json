@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Engenharia de renderização headless para exportação de currículos em PDF",
   "main": "server.js",
+  "config": {
+    "puppeteer_skip_download": "true"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",

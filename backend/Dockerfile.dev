@@ -16,6 +16,9 @@ WORKDIR /app
 
 COPY package*.json ./
 
+# 🌟 SCOPE PRIVILEGE CONCEPT: Sets the global environment variable in the container
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+
 # Installs local dependencies and nodemon globally for Node server hot reload
 RUN npm install && npm install -g nodemon
 

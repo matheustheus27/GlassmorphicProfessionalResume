@@ -1,23 +1,21 @@
-version: '3.8'
-
 services:
   frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile.dev
     container_name: cv_frontend_dev
     ports:
       - "5173:5173"
     volumes:
-      - .:/app
+      - ./frontend:/app
       - /app/node_modules
     environment:
-      - CHOKIDAR_USEPOLLING=true # Enables Hot Reload on Linux/WSL systems
+      - CHOKIDAR_USEPOLLING=true
     command: >
       sh -c "
-      for f in PersonalData SummaryData SkillsData ExperienceData EducationData SettingsData; do
-        if [ ! -f frontend/src/app/data/$$f.ts ] && [ -f frontend/src/app/data/$$f.ts.example ]; then
-          cp frontend/src/app/data/$$f.ts.example frontend/src/app/data/$$f.ts;
+      for f in PersonalData SummaryData SkillsData ExperienceData EducationData SettingsData TranslationsData LanguagesData; do
+        if [ ! -f src/app/data/$$f.ts ] && [ -f src/app/data/$$f.ts.example ]; then
+          cp src/app/data/$$f.ts.example src/app/data/$$f.ts;
         fi;
       done && npm run dev -- --host
       "
@@ -36,7 +34,6 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
-    # The command below checks if .env exists (-f) and runs "cp" before running nodemon
     command: sh -c "if [ ! -f .env ] && [ -f .env.example ]; then cp .env.example .env; fi && nodemon server.js"
     networks:
       - cv_network

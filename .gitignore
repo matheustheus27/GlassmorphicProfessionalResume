@@ -18,6 +18,7 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+backend/.env
 
 # User Data Files (Ignore the candidate's actual data, keep only the sample files in Git)
 frontend/src/app/data/*.ts
